@@ -1,0 +1,47 @@
+:root {
+  /* Primary colors */
+  --primary-700: #B20710;
+  --primary-900: #E50914;
+
+  /* Shades */
+  --shades-100: #08070E;
+  --shades-0: #E5E5E5;
+
+  /* Neutral */
+  --neutral-700: #141414;
+  --neutral-500: #8C8C8C;
+
+  /* Sucess --> Green */
+  --success-700: #71D075;
+
+  /* semantic color variables for this project */
+  --color-background: var(--neutral-700);
+
+  /* Padding presets */
+  --padding-s: 10px;
+  --padding-m: 15px;
+  --padding-l: 20px;
+  --padding-xl: 25px;
+
+  /* Borderradius presets */
+  --border-radius-s: 10px;
+  --border-radius-m: 15px;
+  --border-radius-l: 20px;
+  --border-radius-xl: 10000px;
+}
+
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
