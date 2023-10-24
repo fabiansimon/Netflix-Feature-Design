@@ -1,0 +1,60 @@
+.container {
+    max-width: 70vw;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.summaryContainer {
+    display: flex;
+    background: var(--shades-100);
+    padding: 20px 28px
+}
+
+.thumbnail {
+    max-width: 100%;
+    margin-bottom: -10px;
+}
+
+.filmLogo {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 50px;
+    margin-left: 30px;
+    height: 30px;
+}
+
+.thumbnailContainer {
+    position: relative;
+}
+
+.overlayGradient {
+    position: absolute;
+    height: 100px;
+    left: 0;
+    right: 0;
+    bottom: -10px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 1));
+    pointer-events: none;
+}
+
+.HDContainer {
+    padding: 1px 5px;
+    border-width: 0.7px;
+    border-color: var(--neutral-500);
+    border-style: solid;
+    border-radius: 3px;
+    margin-left: 8px;
+}
+
+.ageContainer {
+    padding: 1px 4px;
+    border-width: 0.7px;
+    border-color: var(--neutral-500);
+    border-style: solid;
+    margin-top: 4px;
+    margin-bottom: 20px;
+    width: 22px;
+    display: flex;
+    justify-content: center;
+}

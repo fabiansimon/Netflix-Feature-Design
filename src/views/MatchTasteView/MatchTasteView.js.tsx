@@ -38,13 +38,13 @@ export default function MatchTasteView() {
 						placeholder='Titles, people, genres'
 					/>
 					<div className={styles.contentContainer}>
-						<MovieSummaryCard moveId={'1234'} />
 						{/* <UserMatchContainer
 							movieId='1234'
 							user={MOCK_USER}
 							onFinishLoading={(match)=>console.log(match)}
-						/>
-						<UserMatchContainer
+						/> */}
+						<MovieSummaryCard movieId={'1234'} />
+						{/* <UserMatchContainer
 							movieId='1234'
 							user={MOCK_USER}
 							onFinishLoading={(match)=>console.log(match)}

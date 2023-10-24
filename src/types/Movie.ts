@@ -1,5 +1,5 @@
 export type Movie = {
-    releaseDate: number;
+    releaseYear: number;
     length: number;
     description: string;
     thumbnailUri: string;
