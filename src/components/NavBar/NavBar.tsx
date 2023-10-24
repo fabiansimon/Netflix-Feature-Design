@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './NavBar.module.css';
-import Logo from '../../assets/logo.png';
 import Body from '../typography/body/Body';
+import Logo from '../Logo/Logo';
 
 type Props = {
   idx?: number,
@@ -13,7 +13,7 @@ export default function NavBar({ idx, navigateView }: Props) {
 
 	return (
 		<div className={styles.container}>
-			<img className={styles.logoContainer} src={Logo} /> 
+			<Logo />
 			{menuOptions.map((option, index) => 
 				<Body
 					key={index}

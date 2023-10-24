@@ -1,7 +1,7 @@
 :root {
   /* Primary colors */
-  --primary-700: #B20710;
-  --primary-900: #E50914;
+  --primary-700: #E50914;
+  --primary-900: #B20710;
 
   /* Shades */
   --shades-100: #08070E;
@@ -30,11 +30,54 @@
   --border-radius-xl: 10000px;
 }
 
+@font-face {
+  font-family: "NetflixSans";
+  src: url('./assets/fonts/NetflixSans-Bold.otf') ;
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "NetflixSans";
+  src: url('./assets/fonts/NetflixSans-Light.otf') ;
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "NetflixSans";
+  src: url('./assets/fonts/NetflixSans-Medium.otf');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "NetflixSans";
+  src: url('./assets/fonts/NetflixSans-Regular.otf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+.custom-font {
+  font-family: "NetflixSans";
+}
+
+input {
+  appearance: none;      /* Remove standard appearance */
+  -webkit-appearance: none; /* For older Safari versions */
+  -moz-appearance: none;    /* For older Firefox versions */
+  background: none;      /* Remove background */
+  border: none;          /* Remove border */
+  font: inherit;         /* Use the same font settings as the parent element */
+  margin: 0;             /* Remove margins */
+  padding: 0;            /* Remove padding */
+  width: auto;           /* Reset width */
+  outline: none;         /* Remove focus outline */
+  box-shadow: none;      /* Remove box shadows */
+  color: inherit;        /* Use the same text color as the parent element */
+}
 
 body {
   margin: 0;
   background: var(--color-background);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'NetflixSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;

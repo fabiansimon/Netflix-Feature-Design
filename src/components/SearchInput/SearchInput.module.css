@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.searchInput {
+    background: var(--shades-100);
+    border-width: 1px;
+    flex-direction: row;
+    display: flex;
+    height: 35px;
+    border-color: var(--shades-0);
+    border-style: solid;
+    justify-items: center;
+    align-items: center;
+    padding: 0px 6px;
+    min-width: 260px;
+    color: var(--shades-0);
+}
+
+.inputContainer {
+    margin-left: 12px;
+}
+
+.askAIContainer {
+    border-width: 1px;
+    border-style: solid;
+    display: flex;
+    height: 35px;
+    border-color: var(--primary-900);
+    background: var(--primary-700);
+    align-items: center;
+    padding: 0px 15px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out, transform 0.1s ease-in-out; 
+}
+
+.askAIContainer:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+    transform: scale(1.08);
+}

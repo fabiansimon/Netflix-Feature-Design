@@ -1,0 +1,10 @@
+.matchContainer {
+    border-width: 1px;
+    border-color: var(--success-700);
+    height: 100px;
+    border-radius: var(--border-radius-s);
+    margin-top: 20px;
+    padding: 20px;
+    padding-bottom: 25px;
+    border-style: dashed;
+}

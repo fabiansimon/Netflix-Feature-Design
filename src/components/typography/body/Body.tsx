@@ -12,17 +12,22 @@ type Props = {
 
 export default function Body({ text, type = 1, color = COLORS.shades[0], onPress, style }: Props) {
 
-	const { fontSize } = React.useMemo(() => {
+	const { fontSize, fontWeight} = React.useMemo(() => {
+		if (type === 2) {
+			// other style
+		}
+
 		return {
-			fontSize: 13 // Default size
+			fontSize: 13, // Default size
+			fontWeight: 300,
 		};
 	}, []);
 
 	return (
 		<div
 			onClick={onPress}
-			style={{ ...{ color, fontSize, cursor: 'pointer' }, ...style, }}
-			className={styles.bodyText}
+			style={{ ...{ color, fontSize, fontWeight, cursor: 'pointer' }, ...style, }}
+			className={`${styles.bodyText} custom-font`}
 		>{text}</div>
 	);
 }

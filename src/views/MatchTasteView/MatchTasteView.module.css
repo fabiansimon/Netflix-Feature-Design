@@ -13,4 +13,38 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    animation: backgroundMovement 30s infinite; 
+}
+
+.contentContainer {
+    display: flex;
+    width: 100%;
+    margin-top: 100px;
+}
+
+@keyframes backgroundMovement {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    20% {
+        top: 55%;
+        left: 55%;
+    }
+    40% {
+        top: 45%;
+        left: 55%;
+    }
+    60% {
+        top: 55%;
+        left: 45%;
+    }
+    80% {
+        top: 45%;
+        left: 45%;
+    }
+    100% {
+        top: 55%;
+        left: 50%;
+    }
 }

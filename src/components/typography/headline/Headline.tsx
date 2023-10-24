@@ -26,6 +26,6 @@ export default function Headline({ text, type = 1, color = COLORS.shades[0], onP
 	return (
 		<div
 			onClick={onPress}
-			className={styles.headlineText} style={{...{ color, fontSize, cursor: 'pointer' }, ...style}}>{text}</div>
+			className={`${styles.headlineText} custom-font`} style={{...{ color, fontSize, cursor: 'pointer' }, ...style}}>{text}</div>
 	);
 }
