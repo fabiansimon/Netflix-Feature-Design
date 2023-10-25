@@ -131,7 +131,7 @@ export default function MatchTasteView() {
 					
 					{/* Match Percentage Section */}
 					<div style={{ marginBottom: 50, width: '50%' }}>
-						<div style={{marginTop: 60}}>
+						<div style={{marginTop: 30}}>
 							<AnimatedText target={(overallMatch * 100)} postfix='%' />
 							<Headline
 								type={3}

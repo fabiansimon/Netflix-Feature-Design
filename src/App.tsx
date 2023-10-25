@@ -6,7 +6,7 @@ import MatchTasteView from './views/MatchTasteView/MatchTasteView.js';
 function App() {
 	const [pageIndex, setPageIndex] = React.useState(0);
 	return (
-		<div className="App">
+		<body>
 			<NavBar navigateView={(idx) => setPageIndex(idx)} idx={pageIndex} /> 
 			<MatchTasteView />
 			{/* <header className="App-header">
@@ -23,7 +23,7 @@ function App() {
           Learn React
         </a>
       </header> */}
-		</div>
+		</body>
 	);
 }
 
