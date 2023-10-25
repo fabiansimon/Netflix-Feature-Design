@@ -12,7 +12,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: backgroundMovement 30s infinite; 
+    transition: opacity .5s ease-in-out;
+    animation: backgroundMovement 30s infinite;
 }
 
 .contentContainer {
@@ -20,6 +21,26 @@
     margin-top: 100px;
     align-self: center;
     padding-inline: 160px;
+}
+
+.leftDottedLine {
+    height: 100%;
+    margin-bottom: -140px;
+    width: 60%;
+    margin-left: 50%;
+    border-bottom-left-radius: 10px;
+    border-bottom: 1px dashed var(--success-700);
+    border-left: 1px dashed var(--success-700);
+}
+
+.rightDottedLine {
+    height: 100%;
+    margin-bottom: -140px;
+    width: 60%;
+    margin-left: -10%;
+    border-bottom-right-radius: 10px;
+    border-bottom: 1px dashed var(--success-700);
+    border-right: 1px dashed var(--success-700);
 }
 
 @keyframes backgroundMovement {

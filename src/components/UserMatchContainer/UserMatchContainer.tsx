@@ -28,9 +28,11 @@ export default function UserMatchContainer({ user, movieId, onFinishLoading, sty
 	React.useEffect(() => {
 		setIsLoading(true);
 		setTimeout(() => {
+			const matchPercentage = Math.random();
+			
 			setIsLoading(false);
 			setMatchData({
-				percentage: 0.88,
+				percentage: matchPercentage,
 				reasons: [
 					{
 						type: ReasonType.CAST,
@@ -42,8 +44,8 @@ export default function UserMatchContainer({ user, movieId, onFinishLoading, sty
 					},
 				]
 			});
-			onFinishLoading(0.88);
-		}, 0);
+			onFinishLoading(matchPercentage);
+		}, Math.random()*1000);
 	}, [movieId, user]);
 
 	return (
@@ -58,9 +60,9 @@ export default function UserMatchContainer({ user, movieId, onFinishLoading, sty
 			<Body type={1} text={email} color={COLORS.neutral[500]} /> 
             
 			{/* Match Container */}
-			{!isLoading && matchData && <div className={styles.matchContainer}>
+			{<div className={styles.matchContainer}>
 				<Subtitle
-					text={`${(matchData?.percentage) * 100}%`}
+					text={`${((matchData?.percentage || 0)*100).toFixed(0)}%`}
 					color={COLORS.success[700]}
 				/>
 				<Subtitle
@@ -69,7 +71,7 @@ export default function UserMatchContainer({ user, movieId, onFinishLoading, sty
 				/>
 
 				{/* Reasons Section */}
-				{matchData?.reasons?.map((reasonsData, index) => {
+				{isLoading && matchData?.reasons?.map((reasonsData, index) => {
 					return <ReasonListTile style={{marginTop: 16}} key={index} data={reasonsData} />;
 				})}
 			</div>}

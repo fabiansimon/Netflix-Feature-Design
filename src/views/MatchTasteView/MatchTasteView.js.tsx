@@ -6,9 +6,10 @@ import SearchInput from '../../components/SearchInput/SearchInput';
 import Button from '../../components/Button/Button';
 import {ReactComponent as PlaybuttonIcon} from '../../assets/icons/playbutton.svg';
 import { COLORS } from '../../constants/theme';
-import MovieSummaryCard from '../../components/MovieSummaryCard/MovieSummaryCard';
 import UserMatchContainer from '../../components/UserMatchContainer/UserMatchContainer';
 import { User } from '../../types/User';
+import MovieSummaryCard from '../../components/MovieSummaryCard/MovieSummaryCard';
+// import MovieSummaryCard from '../../components/MovieSummaryCard/MovieSummaryCard';
 
 const MOCK_USER: User = {
 	id: '1',
@@ -16,19 +17,47 @@ const MOCK_USER: User = {
 	email: 'fabian.simon98@gmail.com',
 };
 
-const MAX_OPACITY = .1;
+const MAX_OPACITY = .2;
 const MAX_HEIGHT = 300; // in percentage
+const USERS_AMOUNT = 2; 
 
 export default function MatchTasteView() {
-	const [matchPercentage, setMatchPercentage] = React.useState<number>(0);
+	const [matchPercentages, setMatchPercentages] = React.useState<number[]>(Array(USERS_AMOUNT).fill(0));
+	const [overallMatch, setOverallMatch] = React.useState<number>(0);
 	const [movieId, setMovieId] = React.useState<string>('1234');
+
+	React.useEffect(() => {
+		const ratedUsers = matchPercentages.filter((m) => m != 0);
+		if (ratedUsers.length != USERS_AMOUNT) return;
+
+		const average = matchPercentages.reduce((acc, curr) => {
+			if (curr != 0) return acc + curr;
+			return acc;
+		}, 0) / ratedUsers.length;
+
+		setOverallMatch(average || 0);
+	}, [matchPercentages]);
 
 	const { opacity, height } = React.useMemo(() => {
 		return {
-			opacity: MAX_OPACITY * matchPercentage,
-			height: `${MAX_HEIGHT * matchPercentage}%`,
+			opacity: MAX_OPACITY * overallMatch,
+			height: `${MAX_HEIGHT * overallMatch}%`,
 		};
-	}, [matchPercentage]);
+	}, [overallMatch]);
+
+	const updateRatingAtIndex = (index: number, val: number) => {
+		setMatchPercentages(prev => {
+			const arr = [...prev];
+			arr[index] = val;
+			return arr;
+		});
+	};
+
+	const handleNextMovie = () => {
+		setMatchPercentages(Array(USERS_AMOUNT).fill(0));
+		setOverallMatch(0);
+		setMovieId(`213213${Math.random()}`);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -50,35 +79,44 @@ export default function MatchTasteView() {
 
 					{/* Main Content Section */}
 					<div className={styles.contentContainer}>
-						<UserMatchContainer
-							style={{flex: 1}}
-							movieId={movieId}
-							user={MOCK_USER}
-							onFinishLoading={(match)=>console.log(match)}
-						/>
+						<div style={{display: 'flex', flex:1, flexDirection: 'column'}}>
+							<UserMatchContainer
+								movieId={movieId}
+								user={MOCK_USER}
+								onFinishLoading={(match)=>updateRatingAtIndex(0, match)}
+							/>
+							<div className={styles.leftDottedLine}/>
+						</div>
 						<MovieSummaryCard
 							style={{marginInline: 50, flex: 2}}
 							movieId={movieId} 
 						/>
-						<UserMatchContainer
-							style={{flex: 1}}
-							movieId={movieId}
-							user={MOCK_USER}
-							onFinishLoading={(match)=>console.log(match)}
-						/>
+						<div style={{display: 'flex', flex:1,flexDirection: 'column'}}>
+							<UserMatchContainer
+								movieId={movieId}
+								user={MOCK_USER}
+								onFinishLoading={(match)=>updateRatingAtIndex(1, match)}
+							/>
+							<div className={styles.rightDottedLine}/>
+						</div>
 					</div>
 
+					
 					{/* Match Percentage Section */}
-					<div style={{marginTop: 36, marginBottom: 50}}>
-						<Headline
-							style={{ fontSize: 56, textAlign: 'center' }}
-							color={COLORS.success[700]}
-							text={`${(matchPercentage*100).toFixed(0)}%`} />
-						<Headline
-							type={3}
-							style={{textAlign: 'center'}}
-							color={COLORS.success[700]}
-							text='overall match' />
+					<div style={{ marginBottom: 50, width: '50%' }}>
+						<div style={{marginTop: 60}}>
+							<Headline
+								style={{ fontSize: 56, textAlign: 'center' }}
+								color={COLORS.success[700]}
+								text={`${(overallMatch*100).toFixed(0)}%`}
+							/>
+							<Headline
+								type={3}
+								style={{textAlign: 'center'}}
+								color={COLORS.success[700]}
+								text='overall match'
+							/>
+						</div>
 					</div>
 
 					{/* Button Section */}
@@ -86,10 +124,7 @@ export default function MatchTasteView() {
 						<Button
 							string='Skip'
 							isSecondary
-							onPress={() => {
-								setMatchPercentage(Math.random());
-								setMovieId('213213');
-							}}
+							onPress={handleNextMovie}
 						/>
 						<Button
 							string='Play'

@@ -72,10 +72,10 @@ export default function MovieSummaryCard({ movieId, style }: Props) {
 					className={styles.thumbnail}
 					src={movieData?.thumbnailUri} />
 				<div className={styles.overlayGradient} />
-				<img className={styles.filmLogo} src={NFilmLogo} />
+				{!isLoading && <img className={styles.filmLogo} src={NFilmLogo} />}
 			</div>
 
-			{!isLoading && <div className={styles.summaryContainer}>
+			{<div className={styles.summaryContainer}>
 
 				{/* Summary Container Left */}
 				<div className={styles.leftSummary}>
