@@ -10,4 +10,15 @@
     padding: 20px;
     padding-bottom: 25px;
     border-style: dashed;
+    animation: animateOpacity 0.5s ease-in;
+}
+ 
+@keyframes animateOpacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+   
 }

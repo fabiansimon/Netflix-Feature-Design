@@ -60,7 +60,7 @@ export default function UserMatchContainer({ user, movieId, onFinishLoading, sty
 			<Body type={1} text={email} color={COLORS.neutral[500]} /> 
             
 			{/* Match Container */}
-			{<div className={styles.matchContainer}>
+			{!isLoading && <div className={styles.matchContainer}>
 				<Subtitle
 					text={`${((matchData?.percentage || 0)*100).toFixed(0)}%`}
 					color={COLORS.success[700]}
@@ -71,7 +71,7 @@ export default function UserMatchContainer({ user, movieId, onFinishLoading, sty
 				/>
 
 				{/* Reasons Section */}
-				{isLoading && matchData?.reasons?.map((reasonsData, index) => {
+				{matchData?.reasons?.map((reasonsData, index) => {
 					return <ReasonListTile style={{marginTop: 16}} key={index} data={reasonsData} />;
 				})}
 			</div>}

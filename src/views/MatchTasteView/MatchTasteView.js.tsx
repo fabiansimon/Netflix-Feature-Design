@@ -9,7 +9,9 @@ import { COLORS } from '../../constants/theme';
 import UserMatchContainer from '../../components/UserMatchContainer/UserMatchContainer';
 import { User } from '../../types/User';
 import MovieSummaryCard from '../../components/MovieSummaryCard/MovieSummaryCard';
-// import MovieSummaryCard from '../../components/MovieSummaryCard/MovieSummaryCard';
+import AnimatedText from '../../components/AnimatedText/AnimatedText';
+import { fetchRandomMovie } from '../../services/movieService';
+import { Movie } from '../../types/Movie';
 
 const MOCK_USER: User = {
 	id: '1',
@@ -24,7 +26,7 @@ const USERS_AMOUNT = 2;
 export default function MatchTasteView() {
 	const [matchPercentages, setMatchPercentages] = React.useState<number[]>(Array(USERS_AMOUNT).fill(0));
 	const [overallMatch, setOverallMatch] = React.useState<number>(0);
-	const [movieId, setMovieId] = React.useState<string>('1234');
+	const [movieData, setMovieData] = React.useState<Movie | null>(null);
 
 	React.useEffect(() => {
 		const ratedUsers = matchPercentages.filter((m) => m != 0);
@@ -53,10 +55,34 @@ export default function MatchTasteView() {
 		});
 	};
 
-	const handleNextMovie = () => {
+	const handleNextMovie = async () => {
 		setMatchPercentages(Array(USERS_AMOUNT).fill(0));
-		setOverallMatch(0);
-		setMovieId(`213213${Math.random()}`);
+		const data = await fetchRandomMovie();
+		if (!data) return;
+		
+		const {
+			classification: minAge,
+			genres, id,
+			overview: description,
+			released_on: releaseYear,
+			runtime: length,
+			title,
+			cast,
+			thumbnail: thumbnailUri
+		} = data;
+
+		setMovieData({
+			description,
+			genres,
+			id,
+			length,
+			minAge,
+			releaseYear,
+			title,
+			tags: ['Bittersweet, Heartfelt'],
+			thumbnailUri,
+			cast,
+		});
 	};
 
 	return (
@@ -79,25 +105,26 @@ export default function MatchTasteView() {
 
 					{/* Main Content Section */}
 					<div className={styles.contentContainer}>
-						<div style={{display: 'flex', flex:1, flexDirection: 'column'}}>
+						<div style={{display: 'flex', flex: 1, flexDirection: 'column'}}>
 							<UserMatchContainer
-								movieId={movieId}
+								movieId={movieData?.id || ''}
 								user={MOCK_USER}
 								onFinishLoading={(match)=>updateRatingAtIndex(0, match)}
 							/>
-							<div className={styles.leftDottedLine}/>
+							<div className={matchPercentages[0] > 0 ? styles.leftDottedLine : ''} />
 						</div>
 						<MovieSummaryCard
 							style={{marginInline: 50, flex: 2}}
-							movieId={movieId} 
+							movieData={movieData!}
 						/>
+
 						<div style={{display: 'flex', flex:1,flexDirection: 'column'}}>
 							<UserMatchContainer
-								movieId={movieId}
+								movieId={movieData?.id || ''}
 								user={MOCK_USER}
 								onFinishLoading={(match)=>updateRatingAtIndex(1, match)}
 							/>
-							<div className={styles.rightDottedLine}/>
+							<div className={matchPercentages[1] > 0 ? styles.rightDottedLine : ''} />
 						</div>
 					</div>
 
@@ -105,11 +132,7 @@ export default function MatchTasteView() {
 					{/* Match Percentage Section */}
 					<div style={{ marginBottom: 50, width: '50%' }}>
 						<div style={{marginTop: 60}}>
-							<Headline
-								style={{ fontSize: 56, textAlign: 'center' }}
-								color={COLORS.success[700]}
-								text={`${(overallMatch*100).toFixed(0)}%`}
-							/>
+							<AnimatedText target={(overallMatch * 100)} postfix='%' />
 							<Headline
 								type={3}
 								style={{textAlign: 'center'}}

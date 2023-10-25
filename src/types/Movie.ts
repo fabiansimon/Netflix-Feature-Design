@@ -1,5 +1,7 @@
 export type Movie = {
-    releaseYear: number;
+    id: string;
+    releaseYear: string;
+    title: string;
     length: number;
     description: string;
     thumbnailUri: string;
@@ -7,4 +9,20 @@ export type Movie = {
     cast: string[];
     genres: string[];
     tags: string[];
+}
+
+export type MovieResponse = {
+    id: string;
+    released_on: string;
+    title: string;
+    runtime: number;
+    overview: string;
+    classification: number;
+    genres: string[];
+    cast: string[];
+    thumbnail: string;
+}
+
+export type MovieGenre = {
+    [key: string]: string
 }

@@ -5,38 +5,17 @@ import styles from './MovieSummaryCard.module.css';
 import { COLORS } from '../../constants/theme';
 import NFilmLogo from '../../assets/images/n_film.png';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
+import Headline from '../typography/headline/Headline';
 
 type Props = {
-	movieId: string;
+	movieData: Movie;
 	style?: React.CSSProperties
 }
 
-const MOCK_MOVIE: Movie = {
-	cast: ['Leonardo DiCaprio', 'Arnold Schwarzenegger'],
-	genres: ['Dutch', 'Drama Movies'],
-	length: 104,    
-	description: 'Following a dispute with his father, a young man falls prey to cryptocurrency’s allure and an entrepreneur’s audacious promises of financial freedom',
-	minAge: 13,
-	releaseYear: 2023,
-	tags: ['Bittersweet, Heartfelt'],
-	thumbnailUri: 'https://occ-0-1489-1490.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABVSUiLpLYI2DWzeq77wNMEx94Y4k8AKHF3qIIyT7ColWAcaGrWrWm4B1LsUs8RSt0ZVcF4ut0PWHoBaA5ucjL0RaBtqAPvVFEwSk.webp?r=9fc',
-};
-
-export default function MovieSummaryCard({ movieId, style }: Props) {
-	const [movieData, setMovieData] = React.useState<Movie | undefined>();
+export default function MovieSummaryCard({ movieData, style }: Props) {
 	const [boxShadow, setBoxShadow] = React.useState<string>('0px 0px 56px -1px rgba(0,0,0,0.4)');
-	const [isLoading, setIsLoading] = React.useState<boolean>(false);
 	
 	const { height, width } = useWindowDimensions();
-
-	React.useEffect(() => {
-		setIsLoading(true);
-		setTimeout(() => {
-			setMovieData(MOCK_MOVIE);
-			setIsLoading(false);
-		}, 300);
-        
-	}, [movieId]);
 
 	React.useEffect(() => {
 		window.addEventListener('mousemove', getMousePosition);
@@ -72,24 +51,29 @@ export default function MovieSummaryCard({ movieId, style }: Props) {
 					className={styles.thumbnail}
 					src={movieData?.thumbnailUri} />
 				<div className={styles.overlayGradient} />
-				{!isLoading && <img className={styles.filmLogo} src={NFilmLogo} />}
+				<div className={styles.titleContainer}>
+					<img className={styles.filmLogo} src={NFilmLogo} />
+					<Headline type={3} text={movieData?.title} />
+				</div>
 			</div>
 
 			{<div className={styles.summaryContainer}>
 
 				{/* Summary Container Left */}
 				<div className={styles.leftSummary}>
-					<div style={{display: 'flex'}}>
-						<Body type={2}
-							color={COLORS.neutral[500]}
-							text={`${movieData?.releaseYear}  ${duration}h`}
-						/>
-						<div className={styles.HDContainer}>
-							<Body type={2} text='HD' />
+					<div>
+						<div style={{display: 'flex'}}>
+							<Body type={2}
+								color={COLORS.neutral[500]}
+								text={`${movieData?.releaseYear?.substring(0, 4) || 2000}  ${duration || 2}h`}
+							/>
+							<div className={styles.HDContainer}>
+								<Body type={2} text='HD' />
+							</div>
 						</div>
-					</div>
-					<div className={styles.ageContainer}>
-						<Body type={2} text={`${movieData?.minAge}+`} />
+						<div className={styles.ageContainer}>
+							<Body type={2} text={`${movieData?.minAge|| 3}`} />
+						</div>
 					</div>
 					<Body type={2}
 						color={COLORS.neutral[500]}
