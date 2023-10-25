@@ -1,15 +1,15 @@
 .container {
     display: flex;
     flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .descriptionContainer {
     display: flex;
-    margin-top: 4px;
 }
 
 .iconContainer {
-    width: 45px;
+    width: 55px;
     margin-left: -14px;
     display: flex;
     justify-content: center;

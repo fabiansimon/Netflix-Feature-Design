@@ -7,14 +7,15 @@ type Props = {
   type?: number,
   color?: string,
   style?: React.CSSProperties,
+  children?: React.ReactElement[]
   onPress?: () => void,
 }
 
-export default function Body({ text, type = 1, color = COLORS.shades[0], onPress, style }: Props) {
+export default function Body({ text, type = 1, color = COLORS.shades[0], onPress, style, children }: Props) {
 
 	const { fontSize, fontWeight} = React.useMemo(() => {
 		if (type === 2) return {
-			fontSize: 10,
+			fontSize: 12,
 			fontWeight: 300,
 		};
 
@@ -29,6 +30,6 @@ export default function Body({ text, type = 1, color = COLORS.shades[0], onPress
 			onClick={onPress}
 			style={{ ...{ color, fontSize, fontWeight, cursor: 'pointer' }, ...style, }}
 			className={`${styles.bodyText} custom-font`}
-		>{text}</div>
+		>{text || children}</div>
 	);
 }

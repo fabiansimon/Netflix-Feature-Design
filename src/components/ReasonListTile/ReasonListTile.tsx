@@ -30,10 +30,11 @@ const REASON_DATA = [
 ];
 
 type Props = {
-    data: Reason,
+	data: Reason,
+	style?: React.CSSProperties
 }
 
-export default function ReasonListTile({ data }: Props) {
+export default function ReasonListTile({ data, style }: Props) {
 	const { type: _type, values } = data;
     
 	const { icon, description, ending, gapWord } = React.useMemo(() => {
@@ -41,8 +42,8 @@ export default function ReasonListTile({ data }: Props) {
 	}, [_type]) as {icon: ReactElement, description: string, ending?: string, gapWord?: string};
     
 	return (
-		<div className={styles.container}>
-			<>
+		<div className={styles.container} style={style	}>
+			<div style={{display: 'flex'}}>
 				<div className={styles.iconContainer}>
 					{icon}
 				</div>
@@ -70,7 +71,7 @@ export default function ReasonListTile({ data }: Props) {
 						text={ending}
 					/>
 				</div>
-			</>
+			</div>
 		</div>
 	);
 }

@@ -1,5 +1,4 @@
 .container {
-    max-width: 70vw;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -57,4 +56,8 @@
     width: 22px;
     display: flex;
     justify-content: center;
+}
+
+.rightSummary {
+    flex-direction: row;
 }

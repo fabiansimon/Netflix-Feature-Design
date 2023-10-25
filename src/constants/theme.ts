@@ -9,6 +9,7 @@ const COLORS = {
 	},
 	neutral: {
 		500: '#8C8C8C',
+		700: '#141414',
 	},
 	success: {
 		700: '#71D075',

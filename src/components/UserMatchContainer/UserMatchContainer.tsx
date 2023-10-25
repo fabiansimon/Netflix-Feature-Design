@@ -64,11 +64,13 @@ export default function UserMatchContainer({ user, movieId, onFinishLoading, sty
 					color={COLORS.success[700]}
 				/>
 				<Subtitle
-					style={{ marginTop: 12, marginBottom: 15 }}
+					style={{ marginTop: 12 }}
 					text={'You might like this because'} color={COLORS.shades[0]}
 				/>
+
+				{/* Reasons Section */}
 				{matchData?.reasons?.map((reasonsData, index) => {
-					return <ReasonListTile key={index} data={reasonsData} />;
+					return <ReasonListTile style={{marginTop: 16}} key={index} data={reasonsData} />;
 				})}
 			</div>}
                 

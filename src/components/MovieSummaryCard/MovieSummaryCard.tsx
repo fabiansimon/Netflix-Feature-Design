@@ -7,7 +7,8 @@ import NFilmLogo from '../../assets/images/n_film.png';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 type Props = {
-    movieId: string;
+	movieId: string;
+	style?: React.CSSProperties
 }
 
 const MOCK_MOVIE: Movie = {
@@ -21,7 +22,7 @@ const MOCK_MOVIE: Movie = {
 	thumbnailUri: 'https://occ-0-1489-1490.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABVSUiLpLYI2DWzeq77wNMEx94Y4k8AKHF3qIIyT7ColWAcaGrWrWm4B1LsUs8RSt0ZVcF4ut0PWHoBaA5ucjL0RaBtqAPvVFEwSk.webp?r=9fc',
 };
 
-export default function MovieSummaryCard({ movieId }: Props) {
+export default function MovieSummaryCard({ movieId, style }: Props) {
 	const [movieData, setMovieData] = React.useState<Movie | undefined>();
 	const [boxShadow, setBoxShadow] = React.useState<string>('0px 0px 56px -1px rgba(0,0,0,0.4)');
 	const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -63,7 +64,7 @@ export default function MovieSummaryCard({ movieId }: Props) {
 	}, [movieData?.length]);
 
 	return (
-		<div className={styles.container} style={{boxShadow}}>
+		<div className={styles.container} style={{...{boxShadow}, ...style}}>
 			
 			{/* Preview Container */}
 			<div className={styles.thumbnailContainer}>
@@ -98,10 +99,10 @@ export default function MovieSummaryCard({ movieId }: Props) {
 
 				{/* Summary Container Right */}
 				<div className={styles.rightSummary}>
-					<div style={{display: 'flex', marginBottom: 10}}>
+					<div style={{ display: 'flex', marginBottom: 10}}>
 						<Body type={2}
 							color={COLORS.neutral[500]}
-							text={'Cast: '}
+							text={'Cast:'}
 						/>
 						<Body type={2}
 							text={movieData?.cast.toString()}

@@ -30,6 +30,23 @@
   --border-radius-xl: 10000px;
 }
 
+button {
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 @font-face {
   font-family: "NetflixSans";
   src: url('./assets/fonts/NetflixSans-Bold.otf') ;
