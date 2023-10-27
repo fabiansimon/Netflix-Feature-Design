@@ -10,6 +10,7 @@
   /* Neutral */
   --neutral-700: #141414;
   --neutral-500: #8C8C8C;
+  --neutral-300: #302F2F;
 
   /* Sucess --> Green */
   --success-700: #71D075;
@@ -18,6 +19,7 @@
   --color-background: var(--neutral-700);
 
   /* Padding presets */
+  --padding-xs: 5px;
   --padding-s: 10px;
   --padding-m: 15px;
   --padding-l: 20px;
@@ -89,6 +91,17 @@ input {
   outline: none;         /* Remove focus outline */
   box-shadow: none;      /* Remove box shadows */
   color: inherit;        /* Use the same text color as the parent element */
+}
+
+.hidden-overflow::-webkit-scrollbar {
+  display: none;
+}
+.hidden-overflow {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.hidden-overflow {
+  -ms-overflow-style: none;
 }
 
 body {

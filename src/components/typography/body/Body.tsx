@@ -14,13 +14,18 @@ type Props = {
 export default function Body({ text, type = 1, color = COLORS.shades[0], onPress, style, children }: Props) {
 
 	const { fontSize, fontWeight} = React.useMemo(() => {
+		if (type === 3) return {
+			fontSize: 10,
+			fontWeight: 300,
+		};
+
 		if (type === 2) return {
 			fontSize: 12,
 			fontWeight: 300,
 		};
 
 		return {
-			fontSize: 13, // Default size
+			fontSize: 14, // Default size
 			fontWeight: 300,
 		};
 	}, []);

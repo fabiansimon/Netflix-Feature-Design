@@ -12,6 +12,7 @@ import MovieSummaryCard from '../../components/MovieSummaryCard/MovieSummaryCard
 import AnimatedText from '../../components/AnimatedText/AnimatedText';
 import { fetchRandomMovie } from '../../services/movieService';
 import { Movie } from '../../types/Movie';
+import SearchModal from '../../components/SearchModal/SearchModal';
 
 const MOCK_USER: User = {
 	id: '1',
@@ -25,8 +26,13 @@ const USERS_AMOUNT = 2;
 
 export default function MatchTasteView() {
 	const [matchPercentages, setMatchPercentages] = React.useState<number[]>(Array(USERS_AMOUNT).fill(0));
+	const [searchModalVisible, setSearchModalVisible] = React.useState<boolean>(false);
 	const [overallMatch, setOverallMatch] = React.useState<number>(0);
 	const [movieData, setMovieData] = React.useState<Movie | null>(null);
+
+	React.useEffect(() =>  {
+		handleNextMovie();
+	}, []);
 
 	React.useEffect(() => {
 		const ratedUsers = matchPercentages.filter((m) => m != 0);
@@ -153,11 +159,20 @@ export default function MatchTasteView() {
 							string='Play'
 							style={{marginLeft: 20}}
 							icon={<PlaybuttonIcon height={18} width={18} />}
-							onPress={()=>console.log('Play')}
+							onPress={() => setSearchModalVisible(true)}
 						/>
 					</div>
+
+					
 				</div>
 			</div>
+			{/* Search Modal */}
+			<SearchModal isVisible={searchModalVisible}
+				onRequestClose={(movieId: string | undefined) => {
+					setSearchModalVisible(false);
+					console.log(movieId);
+				}}
+			/>
 		</div>
 	);
 }

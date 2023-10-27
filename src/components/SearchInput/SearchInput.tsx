@@ -3,6 +3,7 @@ import {ReactComponent as SearchIcon} from '../../assets/icons/search_icon.svg';
 import styles from './SearchInput.module.css';
 import Subtitle from '../typography/subtitle/Subtitle';
 import Body from '../typography/body/Body';
+import { COLORS } from '../../constants/theme';
 
 type Props = {
     placeholder?: string,
@@ -19,7 +20,9 @@ export default function SearchInput({ placeholder, style }: Props) {
 	return (
 		<div className={styles.container} style={style}>
 			<div className={styles.searchInput}>
-				<SearchIcon />
+				<SearchIcon
+					fill={COLORS.shades[0]}
+				/>
 				<input
 					value={term}
 					onChange={handleTextInput}

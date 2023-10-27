@@ -23,6 +23,10 @@ export type MovieResponse = {
     thumbnail: string;
 }
 
-export type MovieGenre = {
-    [key: string]: string
+export type MovieSearchResult = {
+    id: string; 
+    description: string;
+    title: string;
+    cast: string[],
+    thumbnail: string
 }

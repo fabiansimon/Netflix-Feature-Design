@@ -13,7 +13,12 @@ type Props = {
 
 export default function Headline({ text, type = 1, color = COLORS.shades[0], onPress, style}: Props) {
 
-	const { fontSize } = useMemo(() => {
+	const { fontSize, letterSpacing } = useMemo(() => {
+		if (type == 3) return {
+			fontSize: 20, 
+			letterSpacing: -.1
+		};
+
 		if (type == 1) return {
 			fontSize: 36, 
 		};
@@ -26,6 +31,6 @@ export default function Headline({ text, type = 1, color = COLORS.shades[0], onP
 	return (
 		<div
 			onClick={onPress}
-			className={`${styles.headlineText} custom-font`} style={{...{ color, fontSize, cursor: 'pointer' }, ...style}}>{text}</div>
+			className={`${styles.headlineText} custom-font`} style={{...{ color, fontSize, letterSpacing, cursor: 'pointer' }, ...style}}>{text}</div>
 	);
 }
