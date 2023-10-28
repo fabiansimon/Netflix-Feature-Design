@@ -7,10 +7,11 @@ import { COLORS } from '../../constants/theme';
 
 type Props = {
     placeholder?: string,
-    style?: React.CSSProperties,
+	style?: React.CSSProperties,
+	onAskNelly: () => void,
 }
 
-export default function SearchInput({ placeholder, style }: Props) {
+export default function SearchInput({ placeholder, style, onAskNelly }: Props) {
 	const [term, setTerm] = React.useState<string>('');
     
 	const handleTextInput = (event: ChangeEvent<HTMLInputElement>) => { 
@@ -32,7 +33,9 @@ export default function SearchInput({ placeholder, style }: Props) {
 				/>
 			</div>
 			<Subtitle style={{ marginInline: 12}} text='or' />
-			<div className={styles.askAIContainer}>
+			<div
+				onClick={onAskNelly}
+				className={styles.askAIContainer}>
 				<Body text='Ask' style={{marginRight: 4}} />
 				<Subtitle text='Nelly' />
 			</div>

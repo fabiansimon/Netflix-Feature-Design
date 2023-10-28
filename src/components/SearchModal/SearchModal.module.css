@@ -42,7 +42,19 @@
   }
 
   .inputContainer {
-    width: 100%;
+    display: flex;
+    flex: 1;
+  }
+
+  .xmark {
+    cursor: pointer;
+    display: flex;
+    height: 20px;
+    width: 20px;
+    border-radius: var(--border-radius-xl);
+    align-items: center;
+    justify-content: center;
+    background: var(--neutral-300);
   }
 
   .searchInput {
@@ -53,16 +65,20 @@
   }
 
   .suggestionContainer {
-    max-height: 30px;
+    height: 20px;
     border-radius: var(--border-radius-xl);
     border: 1px solid var(--neutral-300);
-    padding: 5px 10px;
+    padding: 6px 10px 4px;
+    align-items: center;
+    justify-content: center;
     background: rgb(140, 140, 140, 0.08);
     cursor: pointer;
+    display: -webkit-box;
   }
 
   .suggestions {
     display: flex;
+    overflow-x: auto;
   }
 
   .searchContainer {
@@ -72,8 +88,24 @@
   }
 
   .resultContainer {
-    padding: 10px 15px 15px 15px;    
+    margin-left: -15px;
+    padding: 10px 0px 15px 15px;    
   }
+
+  .button {
+    border-radius: var(--border-radius-xl);
+    background: var(--primary-900);
+    height: 48px;
+    aspect-ratio: 1/1;
+    border: 2px solid var(--primary-700);
+    display: flex;
+    margin-inline: auto;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+
 
   @keyframes animatedScale {
     0% {

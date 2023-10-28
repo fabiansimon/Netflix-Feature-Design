@@ -3,6 +3,8 @@ import styles from './SearchModal.module.css';
 import Body from '../typography/body/Body';
 import {ReactComponent as SearchIcon} from '../../assets/icons/search_icon.svg';
 import {ReactComponent as AIIcon}  from '../../assets/icons/person_ai.svg';
+import {ReactComponent as MicrophoneIcon}  from '../../assets/icons/microphone.svg';
+import {ReactComponent as XMarkIcon}  from '../../assets/icons/x_mark.svg';
 import { COLORS } from '../../constants/theme';
 import { MovieSearchResult } from '../../types/Movie';
 import { searchMovieByPrompt } from '../../services/movieService';
@@ -25,7 +27,7 @@ export default function SearchModal({ isVisible, onRequestClose }: Props) {
 	const [movieResults, setMovieResults] = React.useState<MovieSearchResult[] | undefined>();
     
 	const handleMovieSearch = async () => {
-		const res = await searchMovieByPrompt(term);
+		const res = await searchMovieByPrompt('movies that were directed by steven spielberg');
 		setMovieResults(res);
 	};
     
@@ -41,25 +43,30 @@ export default function SearchModal({ isVisible, onRequestClose }: Props) {
 
 	return (
 		<div
-			onClick={()=>onRequestClose('213')}
 			className={styles.container}>
 			<div
-				onClick={()=>console.log('hello')}
 				className={styles.innerContainer}>
                 
 				{/* Header Section */}
 				<div className={styles.headerContainer}>
 					<div className={styles.aiContainer}>
 						<Body
+							type={2}
 							text='Artificial Intelligence'
 							color={COLORS.neutral[500]}
 						/>
 						<AIIcon style={{marginLeft: 4, height: 12, width: 12}}/>
 					</div>
-					<Body
-						text='Search with Nelly'
-						style={{position: 'absolute', left: '45%'}}
-					/>
+					<div style={{position: 'absolute', display: 'flex', left: '47%'}}>
+						<Body
+							text='Search with'
+						/>
+						<Body
+							style={{ marginLeft: 4, fontWeight: '600' }}
+							color={COLORS.primary[900]}
+							text='Nelly'
+						/>
+					</div>
 				</div>
                 
 				{/* Search Input + Suggestions */}
@@ -73,17 +80,22 @@ export default function SearchModal({ isVisible, onRequestClose }: Props) {
 							placeholder={'“Show me a movie that is about a real life success story”'}
 							type='text'
 						/>
+						{term.length > 0 &&  <button
+							onClick={() => setTerm('')}
+							className={styles.xmark}>
+							<XMarkIcon />
+						</button>}
 					</div>
-					<div className={styles.suggestions}>
-						{INPUT_SUGGESTION.map((sugg, index) =>
+					<div className='hidden-overflow' style={{display: 'flex', overflowX: 'auto'}}> 
+						{INPUT_SUGGESTION?.map((suggestion, index) => 
 							<div
-								onClick={()=>setTerm(sugg)}
+								onClick={()=>setTerm(suggestion)}
 								key={index}
 								style={{marginRight: 8}}
 								className={styles.suggestionContainer}>
 								<Body
 									type={2}
-									text={`"${sugg}"`}
+									text={`"${suggestion}"`}
 									color={COLORS.neutral[500]}
 								/>
 							</div>)}
@@ -94,18 +106,26 @@ export default function SearchModal({ isVisible, onRequestClose }: Props) {
 				<div className={styles.resultContainer}>
 					<Body
 						type={1}
-						text={`${3} results`}
+						text={`${movieResults?.length} results`}
 						color={COLORS.neutral[500]}
-						style={{marginTop: 4, marginBottom: 14, marginLeft: 10}}
+						style={{marginTop: 4, marginBottom: 14, marginLeft: 25}}
 					/>
-					<div className='hidden-overflow' style={{display: 'flex', overflowX: 'auto'}}> 
+					<div className='hidden-overflow' style={{display: 'flex', overflowX: 'auto', paddingLeft: 15}}> 
 						{movieResults?.map((movie, index) => <ResultMovieCard
-							style={{marginRight: 20}}
+							style={{marginRight: 15}}
 							key={index}
 							movie={movie}
 						/>)}
 					</div>
 				</div>
+
+				{/* Microphone Icon Button */}
+				<button
+					onClick={() => onRequestClose('123')}
+					className={styles.button}
+				>
+					<MicrophoneIcon />
+				</button>
 			</div>
 		</div>
 	);

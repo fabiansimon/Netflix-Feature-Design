@@ -107,6 +107,7 @@ export default function MatchTasteView() {
 					<SearchInput
 						style={{justifyContent: 'center', marginTop: 23}}
 						placeholder='Titles, people, genres'
+						onAskNelly={()=>setSearchModalVisible(true)}
 					/>
 
 					{/* Main Content Section */}
@@ -159,13 +160,14 @@ export default function MatchTasteView() {
 							string='Play'
 							style={{marginLeft: 20}}
 							icon={<PlaybuttonIcon height={18} width={18} />}
-							onPress={() => setSearchModalVisible(true)}
+							onPress={() => console.log('clicked')}
 						/>
 					</div>
 
 					
 				</div>
 			</div>
+
 			{/* Search Modal */}
 			<SearchModal isVisible={searchModalVisible}
 				onRequestClose={(movieId: string | undefined) => {

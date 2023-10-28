@@ -28,7 +28,7 @@ export default function Body({ text, type = 1, color = COLORS.shades[0], onPress
 			fontSize: 14, // Default size
 			fontWeight: 300,
 		};
-	}, []);
+	}, [type]);
 
 	return (
 		<div
