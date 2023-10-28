@@ -99,32 +99,39 @@ export default function MovieSummaryCard({ movieData, style }: Props) {
 
 				{/* Summary Container Right */}
 				<div className={styles.rightSummary}>
-					<div style={{ display: 'flex', marginBottom: 10 }}>
+					<div style={{ display: 'inline', marginBottom: 20 }}>
 						<Body type={2}
 							color={COLORS.neutral[500]}
 							text={'Cast:'}
+							style={{marginRight: 3}}
 						/>
 						<Body type={2}
 							text={arrayToString(movieData?.cast)}
 						/>
 					</div>
-					<div style={{display: 'flex', marginBottom: 10}}>
-						<Body type={2}
-							color={COLORS.neutral[500]}
-							text={'Genres: '}
-						/>
-						<Body type={2}
-							text={arrayToString(movieData?.genres)}
-						/>
+					<div style={{marginTop: 10}}>
+						<div style={{display: 'inline', marginBottom: 10}}>
+							<Body type={2}
+								color={COLORS.neutral[500]}
+								text={'Genres:'}
+								style={{marginRight: 3}}
+							/>
+							<Body type={2}
+								text={arrayToString(movieData?.genres)}
+							/>
+						</div>
 					</div>
-					<div style={{display: 'flex'}}>
-						<Body type={2}
-							color={COLORS.neutral[500]}
-							text={'This movie is: '}
-						/>
-						<Body type={2}
-							text={arrayToString(movieData?.tags)}
-						/>
+					<div style={{marginTop: 10}}>
+						<div style={{display: 'inline'}}>
+							<Body type={2}
+								color={COLORS.neutral[500]}
+								text={'This movie is:'}
+								style={{marginRight: 3}}
+							/>
+							<Body type={2}
+								text={arrayToString(movieData?.tags)}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>}

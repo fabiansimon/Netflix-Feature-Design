@@ -24,9 +24,13 @@ type Props = {
 
 export default function SearchModal({ isVisible, onRequestClose }: Props) {
 	const [term, setTerm] = React.useState<string>('');
-	const [movieResults, setMovieResults] = React.useState<MovieSearchResult[] | undefined>();
+	const [movieResults, setMovieResults] = React.useState<MovieSearchResult[] | undefined>([]);
     
 	const handleMovieSearch = async () => {
+		if (!term) {
+			setMovieResults([]);
+			return;
+		}
 		const res = await searchMovieByPrompt('movies that were directed by steven spielberg');
 		setMovieResults(res);
 	};
@@ -57,15 +61,17 @@ export default function SearchModal({ isVisible, onRequestClose }: Props) {
 						/>
 						<AIIcon style={{marginLeft: 4, height: 12, width: 12}}/>
 					</div>
-					<div style={{position: 'absolute', display: 'flex', left: '47%'}}>
-						<Body
-							text='Search with'
-						/>
-						<Body
-							style={{ marginLeft: 4, fontWeight: '600' }}
-							color={COLORS.primary[900]}
-							text='Nelly'
-						/>
+					<div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+						<div style={{display: 'flex'}}>
+							<Body
+								text='Search with'
+							/>
+							<Body
+								style={{ marginLeft: 4, fontWeight: '600' }}
+								color={COLORS.primary[900]}
+								text='Nelly'
+							/>
+						</div>
 					</div>
 				</div>
                 
@@ -79,7 +85,7 @@ export default function SearchModal({ isVisible, onRequestClose }: Props) {
 							className={styles.inputContainer}
 							placeholder={'“Show me a movie that is about a real life success story”'}
 							type='text'
-						/>
+						/>	
 						{term.length > 0 &&  <button
 							onClick={() => setTerm('')}
 							className={styles.xmark}>
@@ -103,26 +109,27 @@ export default function SearchModal({ isVisible, onRequestClose }: Props) {
 				</div>
                 
 				{/* Results Section */}
-				<div className={styles.resultContainer}>
+				{movieResults && movieResults!.length > 1 && <div className={styles.resultContainer}>
 					<Body
 						type={1}
 						text={`${movieResults?.length} results`}
 						color={COLORS.neutral[500]}
-						style={{marginTop: 4, marginBottom: 14, marginLeft: 25}}
+						style={{marginTop: 4, marginLeft: 25, marginBottom: 14}}
 					/>
-					<div className='hidden-overflow' style={{display: 'flex', overflowX: 'auto', paddingLeft: 15}}> 
+					<div className='hidden-overflow' style={{display: 'flex', overflowX: 'auto', paddingLeft: 15, marginTop: 12}}> 
 						{movieResults?.map((movie, index) => <ResultMovieCard
 							style={{marginRight: 15}}
 							key={index}
 							movie={movie}
 						/>)}
 					</div>
-				</div>
+				</div>}
 
 				{/* Microphone Icon Button */}
 				<button
 					onClick={() => onRequestClose('123')}
 					className={styles.button}
+					style={{marginTop: movieResults?.length ? 0 : 14}}
 				>
 					<MicrophoneIcon />
 				</button>

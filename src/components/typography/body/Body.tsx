@@ -31,10 +31,10 @@ export default function Body({ text, type = 1, color = COLORS.shades[0], onPress
 	}, [type]);
 
 	return (
-		<div
+		<span
 			onClick={onPress}
 			style={{ ...{ color, fontSize, fontWeight, cursor: onPress && 'pointer' }, ...style, }}
 			className={`${styles.bodyText} custom-font`}
-		>{text || children}</div>
+		>{text || children}</span>
 	);
 }
