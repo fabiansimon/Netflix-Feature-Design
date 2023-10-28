@@ -160,7 +160,7 @@ export default function MatchTasteView() {
 							string='Play'
 							style={{marginLeft: 20}}
 							icon={<PlaybuttonIcon height={18} width={18} />}
-							onPress={() => console.log('clicked')}
+							onPress={() => window.location.href='https://www.netflix.com'}
 						/>
 					</div>
 

@@ -12,6 +12,8 @@ type Props = {
 	style?: React.CSSProperties
 }
 
+const MAX_DESC_LENGTH = 200;
+
 export default function MovieSummaryCard({ movieData, style }: Props) {
 	const [boxShadow, setBoxShadow] = React.useState<string>('0px 0px 56px -1px rgba(0,0,0,0.4)');
 	
@@ -41,6 +43,19 @@ export default function MovieSummaryCard({ movieData, style }: Props) {
 
 		return `${hours}:${String(minutes).padStart(2, '0')}`;
 	}, [movieData?.length]);
+
+	const arrayToString = (inputArr: string[]) => React.useMemo(() => {
+		if (!Array.isArray(inputArr)) {
+			return inputArr;
+		}
+
+		if (inputArr.length > 1) {
+			return `${inputArr.slice(0, -1).join(', ')} and ${inputArr[inputArr.length-1]}`;
+		}
+
+		return inputArr[0];
+		
+	}, [movieData]);
 
 	return (
 		<div className={styles.container} style={{...{boxShadow}, ...style}}>
@@ -77,19 +92,20 @@ export default function MovieSummaryCard({ movieData, style }: Props) {
 					</div>
 					<Body type={2}
 						color={COLORS.neutral[500]}
-						text={movieData?.description}
+						text={`${movieData?.description.slice(0, MAX_DESC_LENGTH)} ${movieData?.description?.length > MAX_DESC_LENGTH ? '...' : ''}`}
+						
 					/>
 				</div>
 
 				{/* Summary Container Right */}
 				<div className={styles.rightSummary}>
-					<div style={{ display: 'flex', marginBottom: 10}}>
+					<div style={{ display: 'flex', marginBottom: 10 }}>
 						<Body type={2}
 							color={COLORS.neutral[500]}
 							text={'Cast:'}
 						/>
 						<Body type={2}
-							text={movieData?.cast.toString()}
+							text={arrayToString(movieData?.cast)}
 						/>
 					</div>
 					<div style={{display: 'flex', marginBottom: 10}}>
@@ -98,7 +114,7 @@ export default function MovieSummaryCard({ movieData, style }: Props) {
 							text={'Genres: '}
 						/>
 						<Body type={2}
-							text={movieData?.genres.toString()}
+							text={arrayToString(movieData?.genres)}
 						/>
 					</div>
 					<div style={{display: 'flex'}}>
@@ -107,7 +123,7 @@ export default function MovieSummaryCard({ movieData, style }: Props) {
 							text={'This movie is: '}
 						/>
 						<Body type={2}
-							text={movieData?.tags.toString()}
+							text={arrayToString(movieData?.tags)}
 						/>
 					</div>
 				</div>

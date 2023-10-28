@@ -66,7 +66,7 @@ export default function UserMatchContainer({ user, movieId, onFinishLoading, sty
 					color={COLORS.success[700]}
 				/>
 				<Subtitle
-					style={{ marginTop: 12 }}
+					style={{ marginTop: 1 }}
 					text={'You might like this because'} color={COLORS.shades[0]}
 				/>
 

@@ -33,7 +33,7 @@ export default function Body({ text, type = 1, color = COLORS.shades[0], onPress
 	return (
 		<div
 			onClick={onPress}
-			style={{ ...{ color, fontSize, fontWeight, cursor: 'pointer' }, ...style, }}
+			style={{ ...{ color, fontSize, fontWeight, cursor: onPress && 'pointer' }, ...style, }}
 			className={`${styles.bodyText} custom-font`}
 		>{text || children}</div>
 	);

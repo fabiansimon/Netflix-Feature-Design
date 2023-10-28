@@ -7,6 +7,7 @@ import {ReactComponent as PopcornIcon}from '../../assets/icons/popcorn.svg';
 import Body from '../typography/body/Body';
 import { COLORS } from '../../constants/theme';
 import Subtitle from '../typography/subtitle/Subtitle';
+// import Subtitle from '../typography/subtitle/Subtitle';
 
 const REASON_DATA = [
 	{
@@ -47,7 +48,7 @@ export default function ReasonListTile({ data, style }: Props) {
 				<div className={styles.iconContainer}>
 					{icon}
 				</div>
-				<div className={styles.descriptionContainer}>
+				<div className={styles.descriptionContainer} style={{display: 'inline'}}>
 					<Body type={1}
 						color={COLORS.neutral[500]}
 						text={description}
@@ -55,21 +56,23 @@ export default function ReasonListTile({ data, style }: Props) {
 					<div style={{ display: 'flex', marginLeft: 5}}>
 						{values.map((v, index) => {
 							return (
-								<div style={{display: 'flex'}} key={index}>
+								<div style={{ display: 'flex' }} key={index}>
 									<Subtitle
-										text={v} />
+										text={v}
+										style={{ marginRight: 3, display: 'inline' }}
+									/>
 									<Body
 										text={index !== values.length-1 ? gapWord : ''}
 										color={COLORS.neutral[500]}
-										style={{ marginInline: 3 }} />
+										style={{ marginRight: 3, display: 'inline' }} />
 								</div>);
 						}
 						)}
+						<Body type={1}
+							color={COLORS.neutral[500]}
+							text={ending}
+						/>
 					</div>
-					<Body type={1}
-						color={COLORS.neutral[500]}
-						text={ending}
-					/>
 				</div>
 			</div>
 		</div>
