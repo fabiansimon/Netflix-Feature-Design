@@ -6,7 +6,7 @@ export enum ReasonType {
 
 export type Reason = {
     type: ReasonType;
-    values: string[];
+    values: string[] | number;
   }
   
 export interface MatchData {

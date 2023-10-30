@@ -15,4 +15,8 @@ export class Utils {
 		if (text.length < limit) return text;
 		return `${text.slice(0, limit)}...`;
 	}
+
+	static getRandomNumber(max: number) {
+		return Math.floor(Math.random() * max) + 1;
+	}
 }

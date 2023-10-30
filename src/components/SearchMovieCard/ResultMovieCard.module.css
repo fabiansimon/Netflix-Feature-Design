@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    min-height: 260px;
+    min-height: 270px;
     min-width: 260px;
     max-height: 240px;
     max-width: 260px;
@@ -15,12 +15,11 @@
 
 .container:hover {
     transform: scale(.99);
-
 }
 
 .thumbnail {
-    max-height: 130px;
-    min-height: 130px;
+    max-height: 140px;
+    min-height: 140px;
     min-width: 260px;
     max-width: 260px;
     margin-bottom: -35px;

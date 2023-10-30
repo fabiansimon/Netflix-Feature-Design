@@ -7,7 +7,6 @@ import {ReactComponent as PopcornIcon}from '../../assets/icons/popcorn.svg';
 import Body from '../typography/body/Body';
 import { COLORS } from '../../constants/theme';
 import Subtitle from '../typography/subtitle/Subtitle';
-// import Subtitle from '../typography/subtitle/Subtitle';
 
 const REASON_DATA = [
 	{
@@ -26,7 +25,8 @@ const REASON_DATA = [
 	{
 		type: ReasonType.LENGTH,
 		icon: <ClockIcon height={25} width={25}/>,
-		description: 'Your highest rated movies are usually',
+		description: 'Your highest rated movies are usually less than',
+		ending: 'long',
 	},
 ];
 
@@ -54,7 +54,7 @@ export default function ReasonListTile({ data, style }: Props) {
 						text={description}
 					/>
 					<div style={{ display: 'flex', marginLeft: 5}}>
-						{values.map((v, index) => {
+						{Array.isArray(values) ? values.map((v, index) => {
 							return (
 								<div style={{ display: 'flex' }} key={index}>
 									<Subtitle
@@ -67,7 +67,11 @@ export default function ReasonListTile({ data, style }: Props) {
 										style={{ marginRight: 3, display: 'inline' }} />
 								</div>);
 						}
-						)}
+						) : 
+							<Subtitle
+								text={`${values} minutes`}
+								style={{ marginRight: 3, display: 'inline' }} />
+						}
 						<Body type={1}
 							color={COLORS.neutral[500]}
 							text={ending}

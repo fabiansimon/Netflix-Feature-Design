@@ -126,7 +126,7 @@ export default function MatchTasteView() {
 					<div className={styles.contentContainer}>
 						<div style={{display: 'flex', flex: 1, flexDirection: 'column'}}>
 							<UserMatchContainer
-								movieId={movieData?.id || ''}
+								movieData={movieData}
 								user={MOCK_USERS[0]}
 								onFinishLoading={(match)=>updateRatingAtIndex(0, match)}
 							/>
@@ -139,7 +139,7 @@ export default function MatchTasteView() {
 
 						<div style={{display: 'flex', flex:1,flexDirection: 'column'}}>
 							<UserMatchContainer
-								movieId={movieData?.id || ''}
+								movieData={movieData}
 								user={MOCK_USERS[1]}
 								onFinishLoading={(match)=>updateRatingAtIndex(1, match)}
 							/>

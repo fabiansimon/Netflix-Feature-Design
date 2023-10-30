@@ -24,7 +24,7 @@ export type MovieResponse = {
 }
 
 export type MovieSearchResult = {
-    id: string; 
+    id: string;
     description: string;
     title: string;
     cast: string[],
