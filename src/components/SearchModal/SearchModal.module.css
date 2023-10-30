@@ -54,15 +54,16 @@
   }
 
   .suggestionContainer {
-    height: 20px;
+    max-height: 26px;
+    min-height: 26px;
     border-radius: var(--border-radius-xl);
     border: 1px solid var(--neutral-300);
-    padding: 6px 10px 4px;
+    background: rgb(140, 140, 140, 0.08);
+    flex-grow: 1;
+    cursor: pointer;
+    display: flex;
     align-items: center;
     justify-content: center;
-    background: rgb(140, 140, 140, 0.08);
-    cursor: pointer;
-    display: -webkit-box;
   }
 
   .suggestions {
@@ -92,8 +93,13 @@
     margin-bottom: 16px;
     justify-content: center;
     align-items: center;
+    transition: transform 0.1s ease-in-out;
   }
 
+  .button:hover {
+    transform: scale(1.07);
+  }
+  
   .innerContainer {
     width: 50%;
     min-width: 800px;
@@ -106,7 +112,7 @@
     pointer-events: auto;
   }
 
-  @keyframes animatedScale {
+@keyframes animatedScale {
     0% {
         scale: 0;
         opacity: 0;
@@ -119,5 +125,4 @@
         scale: 1;
         opacity: 1;
     }
-   
 }

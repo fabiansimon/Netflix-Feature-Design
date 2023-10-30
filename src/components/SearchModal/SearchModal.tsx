@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent } from 'react';
 import styles from './SearchModal.module.css';
 import Body from '../typography/body/Body';
 import {ReactComponent as SearchIcon} from '../../assets/icons/search_icon.svg';
@@ -19,10 +19,11 @@ const INPUT_SUGGESTION: string[] = [
 
 type Props = {
     isVisible: boolean,
-    onRequestClose: (moveId: string | undefined) => void,
+	onRequestClose: () => void,
+	onPress: (moveId: string) => void,
 }
 
-export default function SearchModal({ isVisible, onRequestClose }: Props) {
+export default function SearchModal({ isVisible, onRequestClose, onPress }: Props) {
 	const [term, setTerm] = React.useState<string>('');
 	const [movieResults, setMovieResults] = React.useState<MovieSearchResult[] | undefined>([]);
     
@@ -39,16 +40,25 @@ export default function SearchModal({ isVisible, onRequestClose }: Props) {
 		setTerm(event.target.value);
 	};
     
-	useEffect(() => {
+	React.useEffect(() => {
 		handleMovieSearch();
 	}, [term]);
+
+	React.useEffect(() => {
+		if (!isVisible) {
+			setTerm('');
+			setMovieResults([]);
+		}
+	}, [isVisible]);
 
 	if (!isVisible) return <div/>;
 
 	return (
 		<div
+			onClick={onRequestClose}
 			className={styles.container}>
 			<div
+				onClick={(event) => event.stopPropagation()}
 				className={styles.innerContainer}>
                 
 				{/* Header Section */}
@@ -116,9 +126,12 @@ export default function SearchModal({ isVisible, onRequestClose }: Props) {
 						color={COLORS.neutral[500]}
 						style={{marginTop: 4, marginLeft: 25, marginBottom: 14}}
 					/>
-					<div className='hidden-overflow' style={{display: 'flex', overflowX: 'auto', paddingLeft: 15, marginTop: 12}}> 
+					<div className='hidden-overflow' style={{ display: 'flex', overflowX: 'auto', paddingLeft: 15, marginTop: 12 }}> 
 						{movieResults?.map((movie, index) => <ResultMovieCard
-							style={{marginRight: 15}}
+							onPress={() => {
+								onPress(movie.id);
+							}}
+							style={{marginRight: 10}}
 							key={index}
 							movie={movie}
 						/>)}
@@ -127,12 +140,16 @@ export default function SearchModal({ isVisible, onRequestClose }: Props) {
 
 				{/* Microphone Icon Button */}
 				<button
-					onClick={() => onRequestClose('123')}
+					onClick={(event) => {
+						event.stopPropagation();
+						console.log('Hello World');
+					}}
 					className={styles.button}
 					style={{marginTop: movieResults?.length ? 0 : 14}}
 				>
 					<MicrophoneIcon />
 				</button>
+
 			</div>
 		</div>
 	);

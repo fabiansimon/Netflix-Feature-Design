@@ -6,6 +6,7 @@ import { COLORS } from '../../constants/theme';
 import NFilmLogo from '../../assets/images/n_film.png';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import Headline from '../typography/headline/Headline';
+import { Utils } from '../../utils/common';
 
 type Props = {
 	movieData: Movie;
@@ -44,18 +45,7 @@ export default function MovieSummaryCard({ movieData, style }: Props) {
 		return `${hours}:${String(minutes).padStart(2, '0')}`;
 	}, [movieData?.length]);
 
-	const arrayToString = (inputArr: string[]) => React.useMemo(() => {
-		if (!Array.isArray(inputArr)) {
-			return inputArr;
-		}
-
-		if (inputArr.length > 1) {
-			return `${inputArr.slice(0, -1).join(', ')} and ${inputArr[inputArr.length-1]}`;
-		}
-
-		return inputArr[0];
-		
-	}, [movieData]);
+	const arrayToString = (inputArr: string[]) => React.useMemo(() => Utils.formatArray(inputArr), [movieData]);
 
 	return (
 		<div className={styles.container} style={{...{boxShadow}, ...style}}>

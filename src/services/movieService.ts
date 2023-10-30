@@ -55,14 +55,14 @@ async function searchMovieByPrompt(term: string): Promise<MovieSearchResult[] | 
 
 	const cast: string[] = [];
 
-	const seed = getRandomNr(5);
+	const seed = getRandomNr(3);
 	for (let i = 0; i < seed; i++) {
 		cast.push(actors[getRandomNr(actors.length - 1)].name);
 	}
 
 	const mock = {
 		title: 'Test Title',
-		description: 'Lorem Ipsum lkfjödlkfjadösljfösdalkjf',
+		description: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Ending',
 		thumbnail: thumbnails[getRandomNr(thumbnails.length - 1)],
 		cast,
 		id: term,

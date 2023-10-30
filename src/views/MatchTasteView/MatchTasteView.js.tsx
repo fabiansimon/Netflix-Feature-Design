@@ -61,6 +61,11 @@ export default function MatchTasteView() {
 		});
 	};
 
+	const handleMovieBySearch = (id: string) => {
+		console.log(id);
+		handleNextMovie();
+	};
+
 	const handleNextMovie = async () => {
 		setMatchPercentages(Array(USERS_AMOUNT).fill(0));
 		const data = await fetchRandomMovie();
@@ -169,11 +174,13 @@ export default function MatchTasteView() {
 			</div>
 
 			{/* Search Modal */}
-			<SearchModal isVisible={searchModalVisible}
-				onRequestClose={(movieId: string | undefined) => {
+			<SearchModal
+				onPress={(movieId: string) => {
+					handleMovieBySearch(movieId);
 					setSearchModalVisible(false);
-					console.log(movieId);
 				}}
+				isVisible={searchModalVisible}
+				onRequestClose={() => setSearchModalVisible(false)}
 			/>
 		</div>
 	);
