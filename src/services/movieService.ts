@@ -3,14 +3,14 @@ import thumbnails from '../data/thumbnailData.json';
 import actors from '../data/actorsData.json';
 import netflixGenres from '../data/genreData.json';
 import { MovieResponse, MovieSearchResult } from '../types/Movie';
-// import OpenAI from 'openai';
+import OpenAI from 'openai';
 
 const RANDOM_MOVIE_API = 'https://api.reelgood.com/v3.0/content/random?availability=onSources&content_kind=both&nocache=true&region=us&sources=netflix&spin_count=1';
 
-// const openai = new OpenAI({
-// 	apiKey: process.env.REACT_APP_CHATGPT_API_KEY,
-// 	dangerouslyAllowBrowser: true
-// });
+const openai = new OpenAI({
+	apiKey: process.env.REACT_APP_CHATGPT_API_KEY,
+	dangerouslyAllowBrowser: true
+});
 
 function getRandomNr(max: number) {
 	return Math.floor(Math.random() * max) + 1;
@@ -38,20 +38,48 @@ async function fetchRandomMovie(): Promise<MovieResponse | undefined> {
 	}
 }
 
-async function searchMovieByPrompt(term: string): Promise<MovieSearchResult[] | undefined> {
-	// const string = `Please adjust your answer to plain JSON with following specifications: { title as string, description(max 50 words) as string, cast(main 3 actors) as array of strings, releaseYear as number.}. That being said please list maximum 10 movies that include specifications such as ${term}. Please only return data of movies, if none are found please state that no movies match that criteria, Thanks!`;
-	// console.log(typeof string);
-	// // const res = await openai.chat.completions.create({
-	// // 	messages: [{ role: 'system', content:  }],
-	// // 	model: 'gpt-3.5-turbo',
-	// // });
+async function searchMovieByPrompt(term: string): Promise<MovieSearchResult[] | undefined> {//#endregion
+	const prompt = `return a list of max. 5 movies that fit following input: ${term}`;
+	const schema = {
+		'type': 'object',
+		'properties': {
+			'title': {
+				'type': 'string',
+				'description': 'Title of the movie'
+			},
+			'description': {
+				'type': 'string',
+				'description': 'Short description of move (max 100 characters)'
+			},
+			'cast': {
+				'type': 'array',
+				'description': 'List of actors in the movie (name max. 3)',
+				'items': {'type': 'string'}
+			},
+			'releaseYear': {
+				'type': 'number',
+				'description': 'the year when the movie was released',
+			}
+		}
+	};
 
-	// const chatCompletion = await openai.chat.completions.create({
-	// 	messages: [{ role: 'user', content: 'Say this is a test' }],
-	// 	model: 'gpt-3.5-turbo',
-	// });
-	
-	// console.log(chatCompletion);
+	console.log('CALLED WITH TERM:', term);
+
+	try {
+		const res = await openai.chat.completions.create({
+			model: 'gpt-3.5-turbo-0613',
+			messages: [
+				{ role: 'system', 'content': 'You are a helpful movie search engine.' },
+				{ role: 'user', content: prompt }],
+			functions: [{ name: 'get_movies', parameters: schema }],
+			function_call: { name: 'get_movies' }
+		});
+
+		const data = res.choices[0].message.function_call?.arguments;
+		console.log(JSON.parse(data!));
+	} catch (error) {
+		console.error(error);
+	}
 
 	const cast: string[] = [];
 

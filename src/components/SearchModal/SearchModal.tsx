@@ -25,6 +25,7 @@ type Props = {
 
 export default function SearchModal({ isVisible, onRequestClose, onPress }: Props) {
 	const [term, setTerm] = React.useState<string>('');
+	const [isLoading, setIsLoading] = React.useState<boolean>(false);
 	const [movieResults, setMovieResults] = React.useState<MovieSearchResult[] | undefined>([]);
     
 	const handleMovieSearch = async () => {
@@ -32,18 +33,29 @@ export default function SearchModal({ isVisible, onRequestClose, onPress }: Prop
 			setMovieResults([]);
 			return;
 		}
-		const res = await searchMovieByPrompt('movies that were directed by steven spielberg');
-		setMovieResults(res);
+		try {
+			const res = await searchMovieByPrompt(term);
+			setMovieResults(res);
+		} catch (error) {
+			setMovieResults([]);
+		}
+		setIsLoading(false);
 	};
+
+	React.useEffect(() => {
+		if (!term) {
+			return;
+		}
+		setIsLoading(true);
+		const fetchMovie = setTimeout(async () => handleMovieSearch(), 1000);
+	
+		return () => clearTimeout(fetchMovie);
+	}, [term]);
     
 	const handleTermInput = (event: ChangeEvent<HTMLInputElement>) => { 
 		setTerm(event.target.value);
 	};
     
-	React.useEffect(() => {
-		handleMovieSearch();
-	}, [term]);
-
 	React.useEffect(() => {
 		if (!isVisible) {
 			setTerm('');
@@ -147,7 +159,7 @@ export default function SearchModal({ isVisible, onRequestClose, onPress }: Prop
 					className={styles.button}
 					style={{marginTop: movieResults?.length ? 0 : 14}}
 				>
-					<MicrophoneIcon />
+					{!isLoading ? <MicrophoneIcon /> : <span className={styles.loadingIcon}></span>}
 				</button>
 
 			</div>

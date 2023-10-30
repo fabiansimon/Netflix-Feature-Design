@@ -14,11 +14,18 @@ import { fetchRandomMovie } from '../../services/movieService';
 import { Movie } from '../../types/Movie';
 import SearchModal from '../../components/SearchModal/SearchModal';
 
-const MOCK_USER: User = {
-	id: '1',
-	name: 'Fabian',
-	email: 'fabian.simon98@gmail.com',
-};
+const MOCK_USERS: User[] = [
+	{
+		id: '0',
+		name: 'Fabian',
+		email: 'fabian.simon98@gmail.com',
+	},
+	{
+		id: '1',
+		name: 'Elizabeth',
+		email: 'elisabeth@netflix.com',
+	}
+];
 
 const MAX_OPACITY = .2;
 const MAX_HEIGHT = 300; // in percentage
@@ -120,7 +127,7 @@ export default function MatchTasteView() {
 						<div style={{display: 'flex', flex: 1, flexDirection: 'column'}}>
 							<UserMatchContainer
 								movieId={movieData?.id || ''}
-								user={MOCK_USER}
+								user={MOCK_USERS[0]}
 								onFinishLoading={(match)=>updateRatingAtIndex(0, match)}
 							/>
 							<div className={matchPercentages[0] > 0 ? styles.leftDottedLine : ''} />
@@ -133,7 +140,7 @@ export default function MatchTasteView() {
 						<div style={{display: 'flex', flex:1,flexDirection: 'column'}}>
 							<UserMatchContainer
 								movieId={movieData?.id || ''}
-								user={MOCK_USER}
+								user={MOCK_USERS[1]}
 								onFinishLoading={(match)=>updateRatingAtIndex(1, match)}
 							/>
 							<div className={matchPercentages[1] > 0 ? styles.rightDottedLine : ''} />
