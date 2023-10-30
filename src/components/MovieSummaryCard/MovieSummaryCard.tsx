@@ -16,7 +16,7 @@ type Props = {
 const MAX_DESC_LENGTH = 200;
 
 export default function MovieSummaryCard({ movieData, style }: Props) {
-	const [boxShadow, setBoxShadow] = React.useState<string>('0px 0px 56px -1px rgba(0,0,0,0.4)');
+	const [boxShadow, setBoxShadow] = React.useState<string>('0px 0px 56px -1px rgba(0,0,0,0.6)');
 	
 	const { height, width } = useWindowDimensions();
 
@@ -77,7 +77,7 @@ export default function MovieSummaryCard({ movieData, style }: Props) {
 							</div>
 						</div>
 						<div className={styles.ageContainer}>
-							<Body type={2} text={`${movieData?.minAge|| 3}`} />
+							<Body type={2} text={`${movieData?.minAge|| 3}+`} />
 						</div>
 					</div>
 					<Body type={2}
