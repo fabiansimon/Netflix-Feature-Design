@@ -1,46 +1,39 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Feature Specification
+**Movie Night**
 
-In the project directory, you can run:
+*Movie Night* is a feature that focuses on matching diverse movie tastes to ensure users find their ideal movie to watch together. This feature goes beyond conventional recommendations by using AI-driven search capabilities.
 
-### `yarn start`
+**Problem**</br>
+Netflix provides a variety of recommendations tailored to individual users. However, identifying a movie that resonates with the tastes of multiple viewers presents a significant challenge. The vast array of options can transform the anticipation of a movie night into a lengthy decision-making ordeal.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+There's a need for a more efficient solution—one that reduces search time and elevates user convenience, ensuring a seamless movie-night experience.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**Feature Objective**</br>
+Match individual users' tastes to ensure a comprehensive movie experience.
+Reduce the time taken to find a suitable movie.
+Recommend movies based on AI-driven results tailored to user input.
 
-### `yarn test`
+**Feature Description**</br>
+*How does it work?*
+Users can link their profiles and therefore combine their individual tastes in movies.
+By comparing their top movies, the system traverses through their recommendations to find the optimal movie suggestions that work for both users.
+Users can utilise an advanced AI-search, inputting their specific requirements: 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> 	e.g.  "A romantic comedy set in Vienna with Ethan Hawke"
 
-### `yarn build`
+The users only get one recommendation at a time to urge them to finalise their decision.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+*“As a user, I want to be able to link another profile to combine our preferences while also being able to specify our current mood and get accurate recommendations.”*
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Impact and Benefits**</br>
+Increase the user experience by tackling the one main issue on a movie night.
+Separate the platform from competitors, making it more likely to be chosen as the platform for social viewing or movie nights.
+Potentially widen the individual user’s taste and therefore increase their platform engagement.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Implementation**</br>
+An early prototype was designed, developed, and deployed to explore the potential of this feature. Due to the unavailability of the Netflix API, I utilised mock movie data to ensure the product felt complete. For the AI-powered search mechanism, I used OpenAI's API. It's worth noting that the AI search currently takes a bit longer, so I appreciate your patience during testing.
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[POC Website](https://netflix-feature-design.vercel.app/) </br>
+[Video of the Prototype](https://youtu.be/e8-W7rmQi_w) 
