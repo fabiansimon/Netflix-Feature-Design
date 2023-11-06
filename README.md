@@ -3,6 +3,8 @@
 ## Feature Specification
 **Movie Night**
 
+![main_view_small](https://github.com/fabiansimon/Netflix-Feature-Design/assets/77444050/c7dbd03b-7c30-4edc-8ca0-4f60ae8881b8)
+
 *Movie Night* is a feature that focuses on matching diverse movie tastes to ensure users find their ideal movie to watch together. This feature goes beyond conventional recommendations by using AI-driven search capabilities.
 
 **Problem**</br>
@@ -30,7 +32,7 @@ The users only get one recommendation at a time to urge them to finalise their d
 **Impact and Benefits**</br>
 Increase the user experience by tackling the one main issue on a movie night.
 Separate the platform from competitors, making it more likely to be chosen as the platform for social viewing or movie nights.
-Potentially widen the individual user’s taste and therefore increase their platform engagement.
+Potentially widen the individual user’s taste and therefore increase their platform engagement!
 
 **Implementation**</br>
 An early prototype was designed, developed, and deployed to explore the potential of this feature. Due to the unavailability of the Netflix API, I utilised mock movie data to ensure the product felt complete. For the AI-powered search mechanism, I used OpenAI's API. It's worth noting that the AI search currently takes a bit longer, so I appreciate your patience during testing.
